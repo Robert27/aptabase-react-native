@@ -3,6 +3,7 @@ package com.aptabase.aptabase;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -33,12 +34,13 @@ public class RNAptabaseModule extends ReactContextBaseJavaModule {
 		final Map<String, Object> constants = new HashMap<>();
 		final PackageManager packageManager = this.reactContext.getPackageManager();
 		final String packageName = this.reactContext.getPackageName();
-		try {
-			constants.put("appVersion", packageManager.getPackageInfo(packageName, 0).versionName);
-			constants.put("appBuildNumber", packageManager.getPackageInfo(packageName, 0).versionCode);
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-		}
-		return constants;
-	}
+                try {
+                        constants.put("appVersion", packageManager.getPackageInfo(packageName, 0).versionName);
+                        constants.put("appBuildNumber", packageManager.getPackageInfo(packageName, 0).versionCode);
+                } catch (NameNotFoundException e) {
+                        e.printStackTrace();
+                }
+                constants.put("deviceModel", Build.MODEL);
+               return constants;
+       }
 }

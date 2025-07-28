@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 @objc(RNAptabaseModule)
 class RNAptabaseModule: NSObject {
@@ -6,7 +7,8 @@ class RNAptabaseModule: NSObject {
   func constantsToExport() -> [AnyHashable : Any]! {
     return [
       "appVersion": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as Any,
-      "appBuildNumber": Bundle.main.infoDictionary?["CFBundleVersion"] as Any
+      "appBuildNumber": Bundle.main.infoDictionary?["CFBundleVersion"] as Any,
+      "deviceModel": UIDevice.current.model
     ]
   }
 

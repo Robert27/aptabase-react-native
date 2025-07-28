@@ -12,6 +12,7 @@ export interface EnvironmentInfo {
   sdkVersion: string;
   osName: string;
   osVersion: string;
+  deviceModel?: string;
 }
 
 export function getEnvironmentInfo(): EnvironmentInfo {
@@ -27,6 +28,7 @@ export function getEnvironmentInfo(): EnvironmentInfo {
     osName,
     osVersion,
     sdkVersion,
+    ...(version.deviceModel ? { deviceModel: version.deviceModel } : {}),
   };
 }
 

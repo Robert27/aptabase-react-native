@@ -28,19 +28,24 @@ export class AptabaseClient {
     eventName: string,
     props?: Record<string, string | number | boolean>
   ) {
+    const systemProps: any = {
+      isDebug: this._env.isDebug,
+      locale: this._env.locale,
+      osName: this._env.osName,
+      osVersion: this._env.osVersion,
+      appVersion: this._env.appVersion,
+      appBuildNumber: this._env.appBuildNumber,
+      sdkVersion: this._env.sdkVersion,
+    };
+    if (this._env.deviceModel) {
+      systemProps.deviceModel = this._env.deviceModel;
+    }
+
     this._dispatcher.enqueue({
       timestamp: new Date().toISOString(),
       sessionId: this.evalSessionId(),
       eventName: eventName,
-      systemProps: {
-        isDebug: this._env.isDebug,
-        locale: this._env.locale,
-        osName: this._env.osName,
-        osVersion: this._env.osVersion,
-        appVersion: this._env.appVersion,
-        appBuildNumber: this._env.appBuildNumber,
-        sdkVersion: this._env.sdkVersion,
-      },
+      systemProps,
       props: props,
     });
   }

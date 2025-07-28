@@ -28,6 +28,7 @@ export type Event = {
     appVersion: string;
     appBuildNumber: string;
     sdkVersion: string;
+    deviceModel?: string;
   };
   props?: Record<string, string | number | boolean>;
 };
